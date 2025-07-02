@@ -1,0 +1,25 @@
+// maintain hash and add every node, before inserting check if that node already exists 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        unordered_set<ListNode*> ls;
+        while(head!=NULL){
+            if(ls.find(head)!=ls.end()){
+                return true;
+            }
+            ls.insert(head);
+            head = head->next;
+        }
+        return false;
+    }
+};
+// TC : O(n)
+// SC : O(n) 
