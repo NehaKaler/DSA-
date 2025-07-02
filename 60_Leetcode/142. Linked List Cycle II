@@ -1,0 +1,34 @@
+/* traverse till the fast and slow pointer reaches same position as in 'Linked List Cycle Detection'. when they do so, move any one pointer to head position, and then move both fast and slow pointer by one speed. when they again meet, return that node */
+/* why this approach works? -> even i was confused the first time i solved this question and kind of accepted this would be the method, but everything is maths right, so here is a website where i found simplified mathematical explanation for the same. https://www.code-recipe.com/post/linked-list-cycle-ii */ 
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while(fast && fast->next){
+            fast = fast->next->next;
+            slow = slow->next;
+            if(slow == fast){
+                slow = head;
+                while(slow != fast){
+                    slow = slow->next;
+                    fast = fast->next;
+                }
+                return slow; 
+            }
+        }
+        return NULL; 
+    }
+};
+
+// TC : O(n) 
+// SC : O(1) 
