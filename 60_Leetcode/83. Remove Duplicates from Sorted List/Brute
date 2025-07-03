@@ -1,0 +1,37 @@
+/* create set and traverse the whole linked list and add the values of nodes in set. set will only take unique values and will not repeat. 
+after reaching end of linked list, move the pointer back to its head and start replacing the elements from set into the linked list. */ 
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (!head) return nullptr;
+
+        set<int> s;
+        ListNode* temp = head;
+
+        // Collect unique values
+        while (temp != NULL) {
+            s.insert(temp->val);
+            temp = temp->next;
+        }
+
+        temp = head;
+        auto it = s.begin();
+        ListNode* prev = nullptr;
+
+        // Overwrite values with unique ones from set
+        for (; it != s.end(); ++it) {
+            temp->val = *it;
+            prev = temp;
+            temp = temp->next;
+        }
+
+        // Cut off the remaining duplicate nodes
+        if (prev) prev->next = nullptr;
+
+        return head;
+    }
+};
+
+// TC : O(n) 
+// SC : O(n) 
